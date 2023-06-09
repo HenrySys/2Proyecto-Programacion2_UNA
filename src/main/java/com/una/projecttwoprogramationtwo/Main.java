@@ -9,6 +9,7 @@ package com.una.projecttwoprogramationtwo;
  * @author Henry
  */
 public class Main {
+
     public static void main(String[] args) {
         System.out.println("este es una prueba para github");
         System.out.println("segundo comit");
@@ -17,5 +18,5 @@ public class Main {
         System.out.println("cambiossssss");
         System.out.println("yeahh");
     }
-    
+
 }
