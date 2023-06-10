@@ -13,7 +13,8 @@ public class User {
     private String contrasena;
     private String name;
     private String email;
-    
+    private String telefono;
+    //hola gente
     
     
     
