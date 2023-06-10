@@ -22,7 +22,7 @@ public class UserContainer extends UserAdapter {
         }
     }
     
-    private boolean exist(String id){
+    public boolean exist(String id){
         return container.containsKey(id);
     }
     
