@@ -12,6 +12,7 @@ public class User {
     private String id_unique;
     private String contrasena;
     private String name;
+    private String email;
     
     
     
