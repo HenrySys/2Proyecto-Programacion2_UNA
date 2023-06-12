@@ -25,7 +25,7 @@ public class UserAdapter {
             }
             
         } catch (IOException ex) {
-            throw new Exception("Error de EScritura de Archivo");
+            throw new Exception("Error de Escritura de Archivo");
         }finally{
             out.close();
         }
