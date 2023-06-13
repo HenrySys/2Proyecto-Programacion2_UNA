@@ -1,26 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.una.projecttwoprogramationtwo;
 
-import com.una.projecttwoprogramationtwo.models.User.User;
-import com.una.projecttwoprogramationtwo.models.User.UserContainer;
 
-/**
- *
- * @author Henry
- */
+import com.una.projecttwoprogramationtwo.views.frmLogin;
+
+
 public class Main {
 
     public static void main(String[] args) {
-        
+       //System.out.println("hello world");    
+        frmLogin login = new frmLogin();
+        login.setVisible(true);
     }
     
-    public void createFile(){
-        
-        
-    }
-       
-
 }
