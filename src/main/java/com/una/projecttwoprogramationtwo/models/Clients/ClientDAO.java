@@ -102,4 +102,5 @@ public class ClientDAO extends ClientAdapter {
             return false;
         }
     }
+    //finaly
 }
