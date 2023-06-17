@@ -25,7 +25,7 @@ public class ClientDAO extends ClientAdapter {
 
             Document doc = normalizeDocument(url);
 
-            doc.getDocumentElement().normalize();
+            
             ced = doc.createElement("Cedula");
             name = doc.createElement("Nombre");
             lastName = doc.createElement("Apellido");
