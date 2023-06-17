@@ -50,5 +50,5 @@ public class UserAdapter {
         }
         return list;
     }
-
+    
 }
