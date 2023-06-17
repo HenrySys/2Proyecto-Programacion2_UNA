@@ -4,6 +4,8 @@
  */
 package com.una.projecttwoprogramationtwo.views;
 
+import com.una.projecttwoprogramationtwo.views.User.frmUserModel;
+
 /**
  *
  * @author Henry
@@ -29,6 +31,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuIModuloUsuario = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,6 +48,15 @@ public class frmMain extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        jMenuIModuloUsuario.setText("Modulo Usuario");
+        jMenuIModuloUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuIModuloUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuIModuloUsuario);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -64,7 +76,14 @@ public class frmMain extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuIModuloUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIModuloUsuarioActionPerformed
+                frmUserModel userModel=new frmUserModel();
+                userModel.setVisible(true);
+                this.setVisible(false);
+    }//GEN-LAST:event_jMenuIModuloUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,6 +124,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuIModuloUsuario;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
