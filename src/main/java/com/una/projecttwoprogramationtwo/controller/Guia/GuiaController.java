@@ -38,17 +38,58 @@ public class GuiaController implements GuiaInterface {
 
     @Override
     public String[] find(String code) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            Guia guia = dao.find(code);
+        if (guia != null) {
+            String[] data = new String[8];
+            data[0] = guia.getCed();
+            data[1] = guia.getDireccion();
+            data[2] = guia.getEmail();
+            data[3] = guia.getLastName();
+            data[4] = guia.getNacimiento();
+            data[5] = guia.getName();
+            data[6] = guia.getTelephone();
+            data[7] = guia.getNumCarnet();
+            
+            return data;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public String update(String[] data) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            String response = "Cliente no encontrado!";
+        if (dao.exist(data[0])) {
+            Guia g = new Guia();
+            g.setCed(data[0]);
+            g.setName(data[1]);
+            g.setLastName(data[2]);
+            g.setEmail(data[3]);
+            g.setTelephone(data[4]);
+            g.setNacimiento(data[5]);
+            g.setDireccion(data[6]);
+            g.setNumCarnet(data[7]);
+            
+            if (dao.update(g)) {
+                response = "Registro actualizado exitosamente!";
+            } else {
+                response = "Error al actualizar el registro";
+            }
+        }
+        return response;
     }
 
     @Override
     public String delete(String code) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String response = "Guia no encontrado!";
+        if (dao.exist(code)) {
+            if (dao.delete(code)) {
+                response = "Registro eliminado exitosamente!";
+            } else {
+                response = "Error al eliminar el registro";
+            }
+        }
+        return response;
     }
 
     @Override

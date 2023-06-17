@@ -37,17 +37,56 @@ public class ClientController implements ClientInterface {
 
     @Override
     public String[] find(String code) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Client client = dao.find(code);
+        if (client != null) {
+            String[] data = new String[7];
+            data[0] = client.getCed();
+            data[1] = client.getDireccion();
+            data[2] = client.getEmail();
+            data[3] = client.getLastName();
+            data[4] = client.getNacimiento();
+            data[5] = client.getName();
+            data[6] = client.getTelephone();
+            return data;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public String update(String[] data) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String response = "Cliente no encontrado!";
+        if (dao.exist(data[0])) {
+            Client c = new Client();
+            c.setCed(data[0]);
+            c.setName(data[1]);
+            c.setLastName(data[2]);
+            c.setEmail(data[3]);
+            c.setTelephone(data[4]);
+            c.setNacimiento(data[5]);
+            c.setDireccion(data[6]);
+
+            if (dao.update(c)) {
+                response = "Registro actualizado exitosamente!";
+            } else {
+                response = "Error al actualizar el registro";
+            }
+        }
+        return response;
     }
 
     @Override
     public String delete(String code) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String response = "Cliente no encontrado!";
+        if (dao.exist(code)) {
+            if (dao.delete(code)) {
+                response = "Registro eliminado exitosamente!";
+            } else {
+                response = "Error al eliminar el registro";
+            }
+        }
+        return response;
+
     }
 
     @Override
@@ -62,10 +101,8 @@ public class ClientController implements ClientInterface {
             data[i][3] = c.getLastName();
             data[i][4] = c.getNacimiento();
             data[i][5] = c.getName();
-            data[i][6] = c.getTelephone();  
+            data[i][6] = c.getTelephone();
         }
         return data;
     }
 }
-
-
