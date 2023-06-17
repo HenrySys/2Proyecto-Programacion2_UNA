@@ -1,31 +1,32 @@
-package com.una.projecttwoprogramationtwo.controllers.Clients;
+package com.una.projecttwoprogramationtwo.controller.Guia;
 
-import com.una.projecttwoprogramationtwo.models.Clients.Client;
-import com.una.projecttwoprogramationtwo.models.Clients.ClientDAO;
+import com.una.projecttwoprogramationtwo.models.Guia.Guia;
+import com.una.projecttwoprogramationtwo.models.Guia.GuiaDAO;
 import java.util.ArrayList;
 
-public class ClientController implements ClientInterface {
+public class GuiaController implements GuiaInterface {
 
-    ClientDAO dao;
+    GuiaDAO dao;
 
-    public ClientController() throws Exception {
-        dao = new ClientDAO();
+    public GuiaController() throws Exception {
+        dao = new GuiaDAO();
     }
 
     @Override
     public String add(String[] data) {
+
         String response = "Cliente registrado previamente!";
         if (!dao.exist(data[0])) {
-            Client c = new Client();
-            c.setCed(data[0]);
-            c.setName(data[1]);
-            c.setLastName(data[2]);
-            c.setEmail(data[3]);
-            c.setTelephone(data[4]);
-            c.setNacimiento(data[5]);
-            c.setDireccion(data[6]);
+            Guia g = new Guia();
+            g.setCed(data[0]);
+            g.setName(data[1]);
+            g.setLastName(data[2]);
+            g.setEmail(data[3]);
+            g.setTelephone(data[4]);
+            g.setNacimiento(data[5]);
+            g.setDireccion(data[6]);
 
-            if (dao.add(c)) {
+            if (dao.add(g)) {
                 response = "Registro agregado exitosamente!";
             } else {
                 response = "Error al agregar el registro";
@@ -52,20 +53,19 @@ public class ClientController implements ClientInterface {
 
     @Override
     public String[][] getAll() {
-        ArrayList<Client> list = dao.getAll();
+
+        ArrayList<Guia> list = dao.getAll();
         String[][] data = new String[list.size()][7];
         for (int i = 0; i < list.size(); i++) {
-            Client c = list.get(i);
-            data[i][0] = c.getCed();
-            data[i][1] = c.getDireccion();
-            data[i][2] = c.getEmail();
-            data[i][3] = c.getLastName();
-            data[i][4] = c.getNacimiento();
-            data[i][5] = c.getName();
-            data[i][6] = c.getTelephone();  
+            Guia g = list.get(i);
+            data[i][0] = g.getCed();
+            data[i][1] = g.getDireccion();
+            data[i][2] = g.getEmail();
+            data[i][3] = g.getLastName();
+            data[i][4] = g.getNacimiento();
+            data[i][5] = g.getName();
+            data[i][6] = g.getTelephone();
         }
         return data;
     }
 }
-
-
