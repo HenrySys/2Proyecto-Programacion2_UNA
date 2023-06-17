@@ -4,6 +4,8 @@
  */
 package com.una.projecttwoprogramationtwo.views;
 
+import com.una.projecttwoprogramationtwo.views.User.frmUserModel;
+
 /**
  *
  * @author Henry
@@ -48,6 +50,11 @@ public class frmMain extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuIModuloUsuario.setText("Modulo Usuario");
+        jMenuIModuloUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuIModuloUsuarioActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuIModuloUsuario);
 
         jMenuBar1.add(jMenu1);
@@ -69,7 +76,14 @@ public class frmMain extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuIModuloUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIModuloUsuarioActionPerformed
+                frmUserModel userModel=new frmUserModel();
+                userModel.setVisible(true);
+                this.setVisible(false);
+    }//GEN-LAST:event_jMenuIModuloUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
