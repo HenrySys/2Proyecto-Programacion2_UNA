@@ -29,6 +29,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuIModuloUsuario = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,6 +46,10 @@ public class frmMain extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        jMenuIModuloUsuario.setText("Modulo Usuario");
+        jMenu1.add(jMenuIModuloUsuario);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -105,6 +110,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuIModuloUsuario;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
