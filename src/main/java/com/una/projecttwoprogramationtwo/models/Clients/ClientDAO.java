@@ -158,6 +158,36 @@ public class ClientDAO extends ClientAdapter {
     }
 
     public ArrayList<Client> getAll() {
-        return null;
+        ArrayList<Client> clientList = new ArrayList<>();
+        try {
+            Document doc = normalizeDocument(url);
+
+            NodeList list = doc.getDocumentElement().getElementsByTagName("Cliente");
+            for (int i = 0; i < list.getLength(); i++) {
+                Element clientElement = (Element) list.item(i);
+
+                String ced = clientElement.getElementsByTagName("Cedula").item(0).getTextContent();
+                String name = clientElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                String lastName = clientElement.getElementsByTagName("Apellido").item(0).getTextContent();
+                String email = clientElement.getElementsByTagName("Correo electronico").item(0).getTextContent();
+                String telephone = clientElement.getElementsByTagName("Numero de telefono").item(0).getTextContent();
+                String nacimiento = clientElement.getElementsByTagName("Fecha de nacimiento").item(0).getTextContent();
+                String direccion = clientElement.getElementsByTagName("Direccion").item(0).getTextContent();
+
+                Client client = new Client();
+                client.setCed(ced);
+                client.setName(name);
+                client.setLastName(lastName);
+                client.setEmail(email);
+                client.setTelephone(telephone);
+                client.setNacimiento(nacimiento);
+                client.setDireccion(direccion);
+
+                clientList.add(client);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return clientList;
     }
 }

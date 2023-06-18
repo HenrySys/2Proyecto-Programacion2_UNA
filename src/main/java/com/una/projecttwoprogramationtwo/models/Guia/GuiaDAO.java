@@ -25,8 +25,6 @@ public class GuiaDAO extends GuiaAdapter {
         try {
             Document doc = normalizeDocument(url);
 
-        
-
             ced = doc.createElement("Cedula");
             name = doc.createElement("Nombre");
             lastName = doc.createElement("Apellido");
@@ -165,7 +163,39 @@ public class GuiaDAO extends GuiaAdapter {
             return false;
         }
     }
-     public ArrayList<Guia> getAll() {
-        return null;
+
+    public ArrayList<Guia> getAll() {
+        ArrayList<Guia> guiaList = new ArrayList<>();
+        try {
+            Document doc = normalizeDocument(url);
+
+            NodeList list = doc.getDocumentElement().getElementsByTagName("Guia");
+            for (int i = 0; i < list.getLength(); i++) {
+                Element guiaElement = (Element) list.item(i);
+
+                String ced = guiaElement.getElementsByTagName("Cedula").item(0).getTextContent();
+                String name = guiaElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                String lastName = guiaElement.getElementsByTagName("Apellido").item(0).getTextContent();
+                String email = guiaElement.getElementsByTagName("Correo electronico").item(0).getTextContent();
+                String telephone = guiaElement.getElementsByTagName("Numero de telefono").item(0).getTextContent();
+                String nacimiento = guiaElement.getElementsByTagName("Fecha de nacimiento").item(0).getTextContent();
+                String direccion = guiaElement.getElementsByTagName("Direccion").item(0).getTextContent();
+
+                Guia guia = new Guia();
+                guia.setCed(ced);
+                guia.setName(name);
+                guia.setLastName(lastName);
+                guia.setEmail(email);
+                guia.setTelephone(telephone);
+                guia.setNacimiento(nacimiento);
+                guia.setDireccion(direccion);
+
+                guiaList.add(guia);
+            }
+        } catch (Exception ex) {
+            // Manejar la excepción apropiadamente
+            ex.printStackTrace();
+        }
+        return guiaList;
     }
 }

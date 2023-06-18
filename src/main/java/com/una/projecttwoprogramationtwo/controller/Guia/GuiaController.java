@@ -15,7 +15,7 @@ public class GuiaController implements GuiaInterface {
     @Override
     public String add(String[] data) {
 
-        String response = "Cliente registrado previamente!";
+        String response = "Guia registrado previamente!";
         if (!dao.exist(data[0])) {
             Guia g = new Guia();
             g.setCed(data[0]);
@@ -38,7 +38,7 @@ public class GuiaController implements GuiaInterface {
 
     @Override
     public String[] find(String code) {
-            Guia guia = dao.find(code);
+        Guia guia = dao.find(code);
         if (guia != null) {
             String[] data = new String[8];
             data[0] = guia.getCed();
@@ -49,7 +49,7 @@ public class GuiaController implements GuiaInterface {
             data[5] = guia.getName();
             data[6] = guia.getTelephone();
             data[7] = guia.getNumCarnet();
-            
+
             return data;
         } else {
             return null;
@@ -58,7 +58,7 @@ public class GuiaController implements GuiaInterface {
 
     @Override
     public String update(String[] data) {
-            String response = "Cliente no encontrado!";
+        String response = "Guia no encontrado!";
         if (dao.exist(data[0])) {
             Guia g = new Guia();
             g.setCed(data[0]);
@@ -69,7 +69,7 @@ public class GuiaController implements GuiaInterface {
             g.setNacimiento(data[5]);
             g.setDireccion(data[6]);
             g.setNumCarnet(data[7]);
-            
+
             if (dao.update(g)) {
                 response = "Registro actualizado exitosamente!";
             } else {
@@ -96,7 +96,7 @@ public class GuiaController implements GuiaInterface {
     public String[][] getAll() {
 
         ArrayList<Guia> list = dao.getAll();
-        String[][] data = new String[list.size()][7];
+        String[][] data = new String[list.size()][8];
         for (int i = 0; i < list.size(); i++) {
             Guia g = list.get(i);
             data[i][0] = g.getCed();
@@ -106,6 +106,7 @@ public class GuiaController implements GuiaInterface {
             data[i][4] = g.getNacimiento();
             data[i][5] = g.getName();
             data[i][6] = g.getTelephone();
+            data[i][7] = g.getNumCarnet();
         }
         return data;
     }
