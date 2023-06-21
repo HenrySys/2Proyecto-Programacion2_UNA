@@ -5,18 +5,22 @@
 package com.una.projecttwoprogramationtwo.views.User;
 
 import com.una.projecttwoprogramationtwo.views.frmMain;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Henry
  */
 public class frmUserModel extends javax.swing.JFrame {
+    private DefaultTableModel tblModel;
+    private String[] header = {"Id","Contraseña","Nombre","E-mail","Telefono","Edad","Apellido"};
 
     /**
      * Creates new form frmUserModel
      */
     public frmUserModel() {
         initComponents();
+        initTable();
     }
 
     /**
@@ -61,6 +65,11 @@ public class frmUserModel extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         agregarButton.setLabel("Agregar");
+        agregarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarButtonActionPerformed(evt);
+            }
+        });
         jPanel3.add(agregarButton);
 
         modificarButton.setLabel("Modificar");
@@ -195,6 +204,7 @@ public class frmUserModel extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
+        tblUserRegister.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.gray, java.awt.Color.gray));
         jScrollPane1.setViewportView(tblUserRegister);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -219,6 +229,17 @@ public class frmUserModel extends javax.swing.JFrame {
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eliminarButtonActionPerformed
+
+    private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
+        String idUsuario = idUserUniqueField.getText();
+        String password = passwordField.getText();
+        String name = nameField.getText();
+        String email = emailField.getText();
+        String telephone= telephoneFIeld.getText();
+        String age = ageField.getText();
+        String lastName = lastNameFIeld.getText();
+        
+    }//GEN-LAST:event_agregarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,4 +302,9 @@ public class frmUserModel extends javax.swing.JFrame {
     private javax.swing.JTable tblUserRegister;
     private javax.swing.JTextField telephoneFIeld;
     // End of variables declaration//GEN-END:variables
+
+    private void initTable() {
+        tblModel = new DefaultTableModel(header,0);
+        tblUserRegister.setModel(tblModel);
+    }
 }
