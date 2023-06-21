@@ -4,7 +4,9 @@
  */
 package com.una.projecttwoprogramationtwo.views.User;
 
+import com.una.projecttwoprogramationtwo.controllers.User.UserController;
 import com.una.projecttwoprogramationtwo.views.frmMain;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -190,6 +192,7 @@ public class frmUserModel extends javax.swing.JFrame {
         ExitButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         ExitButton.setForeground(new java.awt.Color(255, 0, 0));
         ExitButton.setText("X");
+        ExitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ExitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ExitButtonMouseClicked(evt);
@@ -239,6 +242,23 @@ public class frmUserModel extends javax.swing.JFrame {
         String age = ageField.getText();
         String lastName = lastNameFIeld.getText();
         
+        String[] userData = {idUsuario, password, name, email, telephone, age, lastName};
+    
+        DefaultTableModel model = (DefaultTableModel) tblUserRegister.getModel();
+        model.addRow(userData);
+    
+        clearFields();
+        showMessage("El usuario se ha agregado correctamente.");
+    
+    // Agregar el usuario al contenedor y guardar en el archivo
+        
+        try {
+            UserController userController = new UserController();
+            userController.save(userData);
+            
+        } catch (Exception e) {
+            showMessage(e.getMessage());
+    }
     }//GEN-LAST:event_agregarButtonActionPerformed
 
     /**
@@ -307,4 +327,19 @@ public class frmUserModel extends javax.swing.JFrame {
         tblModel = new DefaultTableModel(header,0);
         tblUserRegister.setModel(tblModel);
     }
+    
+    private void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+}
+
+    private void clearFields() {
+        idUserUniqueField.setText("");
+        passwordField.setText("");
+        nameField.setText("");
+        emailField.setText("");
+        telephoneFIeld.setText("");
+        ageField.setText("");
+        lastNameFIeld.setText("");
+}
+
 }
