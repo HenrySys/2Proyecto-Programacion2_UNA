@@ -2,6 +2,7 @@ package com.una.projecttwoprogramationtwo.controllers.User;
 
 import com.una.projecttwoprogramationtwo.models.User.User;
 import com.una.projecttwoprogramationtwo.models.User.UserContainer;
+import java.util.ArrayList;
 
 public class UserController implements UserInterface {
 
@@ -55,10 +56,11 @@ public class UserController implements UserInterface {
     }
 
     @Override
-    public String update(User userUp) {
-        if (container.exist(userUp.getId_unique())) {
+    public String update(String[] dataUp) {
+        if (container.exist(dataUp[0])) {
             try {
-                if (container.update(userUp)) {
+                User us= new User(dataUp);
+                if (container.update(us)) {
                     return "Usuario actualizado correctamente";
                 }
             } catch (Exception e) {
@@ -66,5 +68,28 @@ public class UserController implements UserInterface {
             }
         }
         return "Error al actualizar el usuario";
+    }
+    
+    @Override
+    public String[][] getAllUser(){
+        try {
+            ArrayList<User> listUs=(ArrayList<User>) container.all();
+        String[][] data= new String[listUs.size()][7];
+        for(int i=0;i<listUs.size();i++){
+            User aux=listUs.get(i);
+            data[i][0]=aux.getId_unique();
+            data[i][1]=aux.getContrasena();
+            data[i][2]=aux.getName();
+            data[i][3]=aux.getEmail();
+            data[i][4]=aux.getTelephone();
+            data[i][5]=aux.getAge();
+            data[i][6]=aux.getLastName();
+        }
+        return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        
     }
 }

@@ -68,6 +68,7 @@ public class UserContainer extends UserAdapter {
 
     public boolean update(User userUp) throws Exception {
         if (exist(userUp.getId_unique())) {
+            
             container.put(userUp.getId_unique(), userUp);
             this.write(new ArrayList<>(container.values()));
             return true;

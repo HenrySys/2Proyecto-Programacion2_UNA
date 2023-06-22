@@ -5,6 +5,7 @@
 package com.una.projecttwoprogramationtwo.views.User;
 
 import com.una.projecttwoprogramationtwo.controllers.User.UserController;
+import com.una.projecttwoprogramationtwo.controllers.User.UserInterface;
 import com.una.projecttwoprogramationtwo.views.frmMain;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,9 +23,35 @@ public class frmUserModel extends javax.swing.JFrame {
      */
     public frmUserModel() {
         initComponents();
-        initTable();
+        filltble();
+        clearFields();
     }
 
+    private void filltble(){
+        try {
+            UserInterface userInterface=new UserController();
+            
+            String[][] data=userInterface.getAllUser();
+            tblModel = new DefaultTableModel(data,header){
+            
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+                
+            };
+            tblUserRegister.setModel(tblModel);
+            refreshTable();
+               
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "error al leer los datos");
+            e.printStackTrace();
+        }
+    }
+    
+    private void refreshTable(){
+        tblUserRegister.setModel(tblModel);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,6 +102,11 @@ public class frmUserModel extends javax.swing.JFrame {
         jPanel3.add(agregarButton);
 
         modificarButton.setLabel("Modificar");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarButtonActionPerformed(evt);
+            }
+        });
         jPanel3.add(modificarButton);
 
         eliminarButton.setLabel("Eliminar");
@@ -208,6 +240,11 @@ public class frmUserModel extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         tblUserRegister.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.gray, java.awt.Color.gray));
+        tblUserRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUserRegisterMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUserRegister);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -230,7 +267,23 @@ public class frmUserModel extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitButtonMouseClicked
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
-        // TODO add your handling code here:
+        if(tblUserRegister.getSelectedRowCount() != 1){
+            return;
+        }
+        String idUsuario = idUserUniqueField.getText();
+        
+        
+        try {
+            UserController userController = new UserController();
+            userController.delete(idUsuario);
+            showMessage("El usuario se ha Eliminado correctamente.");
+            filltble();
+            clearFields();
+            
+        } catch (Exception e) {
+            showMessage(e.getMessage());
+    }
+        
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
     private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
@@ -244,22 +297,75 @@ public class frmUserModel extends javax.swing.JFrame {
         
         String[] userData = {idUsuario, password, name, email, telephone, age, lastName};
     
-        DefaultTableModel model = (DefaultTableModel) tblUserRegister.getModel();
-        model.addRow(userData);
+        
     
-        clearFields();
-        showMessage("El usuario se ha agregado correctamente.");
+        
+        
     
     // Agregar el usuario al contenedor y guardar en el archivo
         
         try {
             UserController userController = new UserController();
             userController.save(userData);
+            showMessage("El usuario se ha agregado correctamente.");
+            filltble();
+            clearFields();
             
         } catch (Exception e) {
             showMessage(e.getMessage());
     }
     }//GEN-LAST:event_agregarButtonActionPerformed
+
+    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
+        // TODO add your handling code here:
+        if(tblUserRegister.getSelectedRowCount() != 1){
+            return;
+        }
+        String idUsuario = idUserUniqueField.getText();
+        String password = passwordField.getText();
+        String name = nameField.getText();
+        String email = emailField.getText();
+        String telephone= telephoneFIeld.getText();
+        String age = ageField.getText();
+        String lastName = lastNameFIeld.getText();
+        
+        String[] userData = {idUsuario, password, name, email, telephone, age, lastName};
+        
+        
+        
+        try {
+            UserController userController = new UserController();
+            userController.update(userData);
+            showMessage("El usuario se ha Actualizado correctamente.");
+            filltble();
+            clearFields();
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_modificarButtonActionPerformed
+
+    private void tblUserRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserRegisterMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2){
+            int fila = tblUserRegister.getSelectedRow();
+            String idUsuario = (String) tblModel.getValueAt(fila, 0);
+            String password = (String) tblModel.getValueAt(fila, 1);
+            String name = (String) tblModel.getValueAt(fila, 2);
+            String email = (String) tblModel.getValueAt(fila, 3);
+            String telephone = (String) tblModel.getValueAt(fila, 4);
+            String age = (String) tblModel.getValueAt(fila, 5);
+            String lastName = (String) tblModel.getValueAt(fila, 6);
+            
+            idUserUniqueField.setText(idUsuario);
+            passwordField.setText(password);
+            nameField.setText(name);
+            emailField.setText(email);
+            telephoneFIeld.setText(telephone);
+            ageField.setText(age);
+            lastNameFIeld.setText(lastName);
+
+        }
+    }//GEN-LAST:event_tblUserRegisterMouseClicked
 
     /**
      * @param args the command line arguments
@@ -323,10 +429,7 @@ public class frmUserModel extends javax.swing.JFrame {
     private javax.swing.JTextField telephoneFIeld;
     // End of variables declaration//GEN-END:variables
 
-    private void initTable() {
-        tblModel = new DefaultTableModel(header,0);
-        tblUserRegister.setModel(tblModel);
-    }
+    
     
     private void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
@@ -341,5 +444,8 @@ public class frmUserModel extends javax.swing.JFrame {
         ageField.setText("");
         lastNameFIeld.setText("");
 }
+    
+    
+    
 
 }
