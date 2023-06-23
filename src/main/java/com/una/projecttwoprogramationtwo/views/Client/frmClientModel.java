@@ -50,6 +50,7 @@ public class frmClientModel extends javax.swing.JFrame {
         JPadel2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(546, 565));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(546, 330));
         jPanel1.setLayout(new java.awt.BorderLayout());
