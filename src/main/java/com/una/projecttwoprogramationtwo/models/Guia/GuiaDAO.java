@@ -193,7 +193,7 @@ public class GuiaDAO extends GuiaAdapter {
                 guiaList.add(guia);
             }
         } catch (Exception ex) {
-            // Manejar la excepción apropiadamente
+           
             ex.printStackTrace();
         }
         return guiaList;

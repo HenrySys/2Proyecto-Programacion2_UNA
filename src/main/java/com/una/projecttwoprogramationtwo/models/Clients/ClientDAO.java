@@ -88,7 +88,7 @@ public class ClientDAO extends ClientAdapter {
         try {
             Document doc = normalizeDocument(url);
 
-            NodeList list = doc.getDocumentElement().getElementsByTagName("product");
+            NodeList list = doc.getDocumentElement().getElementsByTagName("Client");
             for (int i = 0; i < list.getLength(); i++) {
                 if (list.item(i).getChildNodes().item(0).getTextContent().equals(code)) {
                     return true;

@@ -21,7 +21,7 @@ public class frmUserModel extends javax.swing.JFrame {
     /**
      * Creates new form frmUserModel
      */
-    public frmUserModel() {
+    public frmUserModel() { 
         initComponents();
         filltble();
         clearFields();
