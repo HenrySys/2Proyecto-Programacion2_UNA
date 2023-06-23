@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmGuiaModel extends javax.swing.JFrame {
 
     private DefaultTableModel tblModel;
-    private String[] header = {"Id", "Contraseña", "Nombre", "E-mail", "Telefono", "Edad", "Apellido"};
+    private String[] header = {"Nombre", "Apellido", "Cedula", "Edad", "Telefono", "Direccion", "E-mail","Numero de Carnet"};
 
     public frmGuiaModel() {
         initComponents();
@@ -241,6 +241,11 @@ public class frmGuiaModel extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Guias"));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
+        tblGuiaRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGuiaRegisterMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblGuiaRegister);
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -326,6 +331,30 @@ public class frmGuiaModel extends javax.swing.JFrame {
             showMessage(e.getMessage());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void tblGuiaRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGuiaRegisterMouseClicked
+        if (evt.getClickCount() == 2) {
+            int fila = tblGuiaRegister.getSelectedRow();
+            String nombre = (String) tblModel.getValueAt(fila, 0);
+            String apellido = (String) tblModel.getValueAt(fila, 1);
+            String cedula = (String) tblModel.getValueAt(fila, 2);
+            String edad = (String) tblModel.getValueAt(fila, 3);
+            String telefono = (String) tblModel.getValueAt(fila, 4);
+            String direccion = (String) tblModel.getValueAt(fila, 5);
+            String email = (String) tblModel.getValueAt(fila, 6);
+            String numCarnet = (String) tblModel.getValueAt(fila, 7);
+
+            txtNombre.setText(nombre);
+            txtApellido.setText(apellido);
+            txtCedula.setText(cedula);
+            txtEdad.setText(edad);
+            txtTelefono.setText(telefono);
+            txtDireccion.setText(direccion);
+            txtEmail.setText(email);
+            txtNumCarnet.setText(numCarnet);
+
+        }
+    }//GEN-LAST:event_tblGuiaRegisterMouseClicked
 
     /**
      * @param args the command line arguments
