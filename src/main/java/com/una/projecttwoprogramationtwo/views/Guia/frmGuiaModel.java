@@ -295,11 +295,11 @@ public class frmGuiaModel extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String numCarnet = txtNumCarnet.getText();
 
-        String[] userData = {ced, name, email, telephone, age, lastName, direccion, numCarnet};
+        String[] guiaData = {ced, name, email, telephone, age, lastName, direccion, numCarnet};
 
         try {
             GuiaController GuiaController = new GuiaController();
-            GuiaController.update(userData);
+            GuiaController.update(guiaData);
             showMessage("El Guia se ha Actualizado correctamente.");
             filltble();
             clearFields();
@@ -317,12 +317,12 @@ public class frmGuiaModel extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String numCarnet = txtNumCarnet.getText();
 
-        String[] userData = {ced, name, email, telephone, age, lastName, direccion, numCarnet};
+        String[] guiaData = {ced, name, email, telephone, age, lastName, direccion, numCarnet};
 
         // Agregar el usuario al contenedor y guardar en el archivo
         try {
             GuiaController userController = new GuiaController();
-            userController.add(userData);
+            userController.add(guiaData);
             showMessage("El Guia se ha agregado correctamente.");
             filltble();
             clearFields();
