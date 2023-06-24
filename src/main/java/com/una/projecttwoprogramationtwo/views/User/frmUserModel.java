@@ -15,41 +15,42 @@ import javax.swing.table.DefaultTableModel;
  * @author Henry
  */
 public class frmUserModel extends javax.swing.JFrame {
+
     private DefaultTableModel tblModel;
-    private String[] header = {"Id","Contraseña","Nombre","E-mail","Telefono","Edad","Apellido"};
+    private String[] header = {"Id", "Contraseña", "Nombre", "E-mail", "Telefono", "Edad", "Apellido"};
 
     /**
      * Creates new form frmUserModel
      */
-    public frmUserModel() { 
+    public frmUserModel() {
         initComponents();
         filltble();
         clearFields();
     }
 
-    private void filltble(){
+    private void filltble() {
         try {
-            UserInterface userInterface=new UserController();
-            
-            String[][] data=userInterface.getAllUser();
-            tblModel = new DefaultTableModel(data,header){
-            
+            UserInterface userInterface = new UserController();
+
+            String[][] data = userInterface.getAllUser();
+            tblModel = new DefaultTableModel(data, header) {
+
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
-                
+
             };
             tblUserRegister.setModel(tblModel);
             refreshTable();
-               
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "error al leer los datos");
             e.printStackTrace();
         }
     }
-    
-    private void refreshTable(){
+
+    private void refreshTable() {
         tblUserRegister.setModel(tblModel);
     }
 
@@ -85,6 +86,7 @@ public class frmUserModel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(550, 650));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(550, 250));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -134,6 +136,11 @@ public class frmUserModel extends javax.swing.JFrame {
         jPanel4.add(jLabel2, gridBagConstraints);
 
         passwordField.setText("jTextField2");
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -256,30 +263,29 @@ public class frmUserModel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ExitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitButtonMouseClicked
-                frmMain main=new frmMain();
-                
-                main.setVisible(true);
-                dispose();
+        frmMain main = new frmMain();
+
+        main.setVisible(true);
+        dispose();
     }//GEN-LAST:event_ExitButtonMouseClicked
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
-        if(tblUserRegister.getSelectedRowCount() != 1){
+        if (tblUserRegister.getSelectedRowCount() != 1) {
             return;
         }
         String idUsuario = idUserUniqueField.getText();
-        
-        
+
         try {
             UserController userController = new UserController();
             userController.delete(idUsuario);
             showMessage("El usuario se ha Eliminado correctamente.");
             filltble();
             clearFields();
-            
+
         } catch (Exception e) {
             showMessage(e.getMessage());
-    }
-        
+        }
+
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
     private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
@@ -287,48 +293,40 @@ public class frmUserModel extends javax.swing.JFrame {
         String password = passwordField.getText();
         String name = nameField.getText();
         String email = emailField.getText();
-        String telephone= telephoneFIeld.getText();
+        String telephone = telephoneFIeld.getText();
         String age = ageField.getText();
         String lastName = lastNameFIeld.getText();
-        
+
         String[] userData = {idUsuario, password, name, email, telephone, age, lastName};
-    
-        
-    
-        
-        
-    
-    // Agregar el usuario al contenedor y guardar en el archivo
-        
+
+        // Agregar el usuario al contenedor y guardar en el archivo
         try {
             UserController userController = new UserController();
             userController.save(userData);
             showMessage("El usuario se ha agregado correctamente.");
             filltble();
             clearFields();
-            
+
         } catch (Exception e) {
             showMessage(e.getMessage());
-    }
+        }
     }//GEN-LAST:event_agregarButtonActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         // TODO add your handling code here:
-        if(tblUserRegister.getSelectedRowCount() != 1){
+        if (tblUserRegister.getSelectedRowCount() != 1) {
             return;
         }
         String idUsuario = idUserUniqueField.getText();
         String password = passwordField.getText();
         String name = nameField.getText();
         String email = emailField.getText();
-        String telephone= telephoneFIeld.getText();
+        String telephone = telephoneFIeld.getText();
         String age = ageField.getText();
         String lastName = lastNameFIeld.getText();
-        
+
         String[] userData = {idUsuario, password, name, email, telephone, age, lastName};
-        
-        
-        
+
         try {
             UserController userController = new UserController();
             userController.update(userData);
@@ -337,12 +335,12 @@ public class frmUserModel extends javax.swing.JFrame {
             clearFields();
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void tblUserRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserRegisterMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2) {
             int fila = tblUserRegister.getSelectedRow();
             String idUsuario = (String) tblModel.getValueAt(fila, 0);
             String password = (String) tblModel.getValueAt(fila, 1);
@@ -351,7 +349,7 @@ public class frmUserModel extends javax.swing.JFrame {
             String telephone = (String) tblModel.getValueAt(fila, 4);
             String age = (String) tblModel.getValueAt(fila, 5);
             String lastName = (String) tblModel.getValueAt(fila, 6);
-            
+
             idUserUniqueField.setText(idUsuario);
             passwordField.setText(password);
             nameField.setText(name);
@@ -362,6 +360,10 @@ public class frmUserModel extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_tblUserRegisterMouseClicked
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,11 +427,9 @@ public class frmUserModel extends javax.swing.JFrame {
     private javax.swing.JTextField telephoneFIeld;
     // End of variables declaration//GEN-END:variables
 
-    
-    
     private void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
-}
+    }
 
     private void clearFields() {
         idUserUniqueField.setText("");
@@ -439,9 +439,6 @@ public class frmUserModel extends javax.swing.JFrame {
         telephoneFIeld.setText("");
         ageField.setText("");
         lastNameFIeld.setText("");
-}
-    
-    
-    
+    }
 
 }
