@@ -268,7 +268,7 @@ public class frmGuiaModel extends javax.swing.JFrame {
         try {
             GuiaController GuiaController = new GuiaController();
             GuiaController.delete(idGuia);
-            showMessage("El usuario se ha Eliminado correctamente.");
+            showMessage("El Guia se ha Eliminado correctamente.");
             filltble();
             clearFields();
 
